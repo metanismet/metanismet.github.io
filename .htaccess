@@ -1,0 +1,17 @@
+Options -MultiViews
+
+RewriteEngine On
+
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.html [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^.]+)$ $1.html [L]
+RewriteEngine On
+
+RewriteCond expr "tolower(%{REQUEST_URI}) =~ /(.*)/"
+RewriteRule [A-Z] %1 [R=301,L]
+
+ErrorDocument 404 /index.html
+ErrorDocument 403 /index.html
+ErrorDocument 500 /index.html
